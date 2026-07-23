@@ -1,3 +1,12 @@
+
+
+<img width="647" height="513" alt="2026-07-23_19-14-52" src="https://github.com/user-attachments/assets/7dfa3f30-ff51-4469-9ade-78491bafd958" />
+
+
+
+
+
+
 # Mouse Macro Recorder
 
 A simple, lightweight **Windows** mouse macro recorder written in **Rust**.
