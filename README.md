@@ -13,5 +13,5 @@ It is just silly to rely on some random app that you download from the internet 
 
 
 
-<img width="647" height="513" alt="2026-07-23_19-14-52" src="https://github.com/user-attachments/assets/7dfa3f30-ff51-4469-9ade-78491bafd958" />
+
 
