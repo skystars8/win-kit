@@ -62,11 +62,7 @@ This application is built for **Windows** using the `native-windows-gui` crate, 
 3. Click **"Generate Hash"** to compute the SHA3-512 hash. The hash will appear in the output box.
 4. If you want to clear the output, click the **"Clear"** button.
 
-### Screenshot
 
-![SHA3-512 Hash Generator](screenshot.png)
-
-*Screenshot of the application running (add a screenshot here).*
 
 ## Code Overview
 
@@ -83,5 +79,4 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 ## Contributions
 
-Contributions, bug reports, and feature requests are welcome! Feel free to open issues and pull requests on the [GitHub repository](https://github.com/your-username/sha3_hash_app).
-
+If u want something, just have ai change it for you. 
