@@ -14,5 +14,19 @@ With the power coupe of Rust lang and Ai, anyone can vibe code awesome apps. It 
 
 
 
+Note- 
 
+SmartScreen is mostly triggered by the **Mark of the Web** (MotW). When a file is downloaded from the internet (or comes from email/USB in some cases), Windows stamps it with a Zone.Identifier alternate data stream. That flag is what makes SmartScreen check reputation and often show the blue “Windows protected your PC” screen.
+
+When you compile with `cargo build` (or `cargo run`) on your own machine:
+
+- The `.exe` is created locally
+- It has **no** Mark of the Web
+- SmartScreen usually stays quiet
+
+That’s why you didn’t see the warning.
+
+If you copy that same `.exe` to another computer, upload it somewhere and download it again, or email it to yourself, then SmartScreen will almost certainly start complaining until the binary builds some reputation.
+
+So local development/build is the easy path — the friction only really appears once the file leaves your machine.
 
