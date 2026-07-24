@@ -10,7 +10,7 @@
 
 # Simplicity by design 
 
-With the ultimate power couple of Rust lang and Ai, anyone can vibe code awesome apps. It is just silly to rely on some random app that you download from the internet unless you can see the code. This is just a bunch of simple Rust apps for windows. Extremely easy to audit, just feed the tiny file to ai in order for it to change anything for you.
+With the ultimate power couple of Rust lang and Ai, anyone can vibe code awesome apps. It is just silly to rely on some random app that you download from the internet unless you can see the code. This repo is a bunch of simple Rust apps for windows. Extremely easy to audit, just feed the tiny file to ai in order for it to change anything for you.
 
 
 
