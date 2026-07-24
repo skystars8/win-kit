@@ -1,0 +1,15 @@
+[package]
+name = "threefish-cli"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+threefish = { version = "0.5", features = ["cipher"] }
+argon2 = "0.5"
+hmac = "0.12"
+sha2 = "0.10"
+rand = "0.8"
+rpassword = "7"
+zeroize = { version = "1", features = ["derive"] }
+anyhow = "1"
+cipher = "0.4"          # needed for GenericArray + BlockEncrypt
