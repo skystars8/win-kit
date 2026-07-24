@@ -104,4 +104,4 @@ These are the parts that actually determine whether decryption will succeed or f
 
 - **For high-stakes or long-term archival use** (or if you want maximum future-proofing and auditability): I would prefer a widely-used AEAD such as **AES-256-GCM** or **XChaCha20-Poly1305** with the same Argon2id + authenticated construction. Those have far more scrutiny and ready-made, audited crates.
 
-So: the app is good and trustworthy for the use case you described. The uncommon choice of Threefish-1024 is the main aesthetic/ecosystem risk, not a correctness risk in the code itself.
+So: the app is good and trustworthy for the use case. The uncommon choice of Threefish-1024 is the main aesthetic/ecosystem risk, not a correctness risk in the code itself.
