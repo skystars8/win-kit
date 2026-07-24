@@ -1,0 +1,17 @@
+powercfg /hibernate off   (run from terminal as admin disables fast startup)
+
+
+
+
+bitlocker 
+
+manage-bde -status
+
+manage-bde -off C:
+manage-bde -off D:
+
+
+
+
+
+

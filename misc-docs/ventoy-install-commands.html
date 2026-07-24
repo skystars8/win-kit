@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ventoy Install Commands – Clean Start (Linux)</title>
+  <style>
+    :root {
+      --bg: #0f1419;
+      --card: #1a2332;
+      --text: #e7ecf3;
+      --muted: #9aa7b8;
+      --accent: #3b82f6;
+      --success: #22c55e;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+      --border: #2d3a4f;
+      --code-bg: #0d1117;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      padding: 2rem 1rem;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    h1 {
+      font-size: 1.9rem;
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+      background: linear-gradient(90deg, #60a5fa, #34d399);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .subtitle {
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+
+    h2 {
+      font-size: 1.25rem;
+      margin: 2.2rem 0 0.9rem;
+      color: #93c5fd;
+    }
+
+    p {
+      margin-bottom: 1rem;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.3rem 1.5rem;
+      margin-bottom: 1.4rem;
+    }
+
+    .step {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1.8rem;
+      align-items: flex-start;
+    }
+
+    .step-number {
+      flex-shrink: 0;
+      width: 2.1rem;
+      height: 2.1rem;
+      background: var(--accent);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1rem;
+    }
+
+    .step-content {
+      flex: 1;
+    }
+
+    .step-title {
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+      color: #e0f2fe;
+    }
+
+    pre {
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 0.9rem 1.1rem;
+      overflow-x: auto;
+      margin: 0.6rem 0 0.4rem;
+      font-size: 0.92rem;
+      line-height: 1.5;
+    }
+
+    code {
+      font-family: "SF Mono", "Fira Code", "Cascadia Code", Consolas, monospace;
+      color: #7dd3fc;
+    }
+
+    pre code {
+      color: #e2e8f0;
+    }
+
+    .note {
+      font-size: 0.92rem;
+      color: var(--muted);
+      margin-top: 0.3rem;
+    }
+
+    .success-box {
+      background: rgba(34, 197, 94, 0.12);
+      border: 1px solid rgba(34, 197, 94, 0.35);
+      border-radius: 10px;
+      padding: 1rem 1.2rem;
+      margin: 1.5rem 0;
+      color: #86efac;
+    }
+
+    .warning-box {
+      background: rgba(245, 158, 11, 0.12);
+      border: 1px solid rgba(245, 158, 11, 0.4);
+      border-radius: 10px;
+      padding: 1rem 1.2rem;
+      margin: 1.5rem 0;
+      color: #fcd34d;
+    }
+
+    .danger-box {
+      background: rgba(239, 68, 68, 0.12);
+      border: 1px solid rgba(239, 68, 68, 0.4);
+      border-radius: 10px;
+      padding: 1rem 1.2rem;
+      margin: 1.5rem 0;
+      color: #fca5a5;
+    }
+
+    ul {
+      margin: 0.6rem 0 1rem 1.4rem;
+    }
+
+    li {
+      margin-bottom: 0.4rem;
+    }
+
+    a {
+      color: #60a5fa;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    footer {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .copy-hint {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-top: 0.3rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Ventoy Install – Clean Start</h1>
+      <p class="subtitle">Working commands for Fedora / Linux<br>
+      (USB device: <code>/dev/sda</code>)</p>
+    </header>
+
+    <div class="danger-box">
+      <strong>⚠ Important:</strong> These commands will erase everything on the USB drive (<code>/dev/sda</code>).
+      Make sure you have selected the correct device.
+    </div>
+
+    <!-- Step 1 -->
+    <div class="step">
+      <div class="step-number">1</div>
+      <div class="step-content">
+        <div class="step-title">Go to home folder and clean up old files</div>
+        <pre><code>cd ~
+rm -rf ventoy*</code></pre>
+      </div>
+    </div>
+
+    <!-- Step 2 -->
+    <div class="step">
+      <div class="step-number">2</div>
+      <div class="step-content">
+        <div class="step-title">Download the latest Ventoy (Linux version)</div>
+        <pre><code>wget https://sourceforge.net/projects/ventoy/files/v1.1.16/ventoy-1.1.16-linux.tar.gz</code></pre>
+      </div>
+    </div>
+
+    <!-- Step 3 -->
+    <div class="step">
+      <div class="step-number">3</div>
+      <div class="step-content">
+        <div class="step-title">Extract the archive</div>
+        <pre><code>tar -xzf ventoy-1.1.16-linux.tar.gz</code></pre>
+      </div>
+    </div>
+
+    <!-- Step 4 -->
+    <div class="step">
+      <div class="step-number">4</div>
+      <div class="step-content">
+        <div class="step-title">Enter the Ventoy folder</div>
+        <pre><code>cd ventoy-1.1.16</code></pre>
+      </div>
+    </div>
+
+    <!-- Step 5 -->
+    <div class="step">
+      <div class="step-number">5</div>
+      <div class="step-content">
+        <div class="step-title">Confirm the script exists</div>
+        <pre><code>ls</code></pre>
+        <p class="note">You should see <code>Ventoy2Disk.sh</code> in the list.</p>
+      </div>
+    </div>
+
+    <!-- Step 6 -->
+    <div class="step">
+      <div class="step-number">6</div>
+      <div class="step-content">
+        <div class="step-title">Double-check the USB device</div>
+        <pre><code>lsblk</code></pre>
+        <p class="note">Confirm that your USB drive is still showing as <code>sda</code> (the 58.6G one).</p>
+      </div>
+    </div>
+
+    <!-- Step 7 -->
+    <div class="step">
+      <div class="step-number">7</div>
+      <div class="step-content">
+        <div class="step-title">Install Ventoy</div>
+        <pre><code>sudo sh Ventoy2Disk.sh -i -g -s /dev/sda</code></pre>
+        <p class="note">
+          <code>-i</code> = install &nbsp;|&nbsp;
+          <code>-g</code> = GPT partition style &nbsp;|&nbsp;
+          <code>-s</code> = Secure Boot support
+        </p>
+        <p class="note">Type <code>y</code> and press Enter when it asks for confirmation.</p>
+      </div>
+    </div>
+
+    <div class="success-box">
+      <strong>✓ Done!</strong><br>
+      After the install finishes, the USB is ready.<br>
+      Just copy your Windows ISO (and any other ISOs) onto the large partition.
+    </div>
+
+    <h2>After Installation</h2>
+    <div class="card">
+      <p>You can now copy ISO files like this:</p>
+      <pre><code>cp /path/to/Windows.iso /run/media/$USER/Ventoy/</code></pre>
+      <p style="margin-top: 0.8rem;">Or simply open the USB in the file manager and drag & drop the ISO files.</p>
+    </div>
+
+    <h2>Useful Commands Later</h2>
+    <div class="card">
+      <p><strong>Update Ventoy</strong> (keeps your ISOs):</p>
+      <pre><code>sudo sh Ventoy2Disk.sh -u /dev/sda</code></pre>
+
+      <p style="margin-top: 1rem;"><strong>Force reinstall</strong>:</p>
+      <pre><code>sudo sh Ventoy2Disk.sh -I -g -s /dev/sda</code></pre>
+    </div>
+
+    <footer>
+      Commands tested on Fedora · Official site: <a href="https://www.ventoy.net" target="_blank">ventoy.net</a>
+    </footer>
+  </div>
+</body>
+</html>

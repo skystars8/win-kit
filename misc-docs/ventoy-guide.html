@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ventoy Guide – Create a Multi-Boot USB from Linux</title>
+  <style>
+    :root {
+      --bg: #0f1419;
+      --card: #1a2332;
+      --text: #e7ecf3;
+      --muted: #9aa7b8;
+      --accent: #3b82f6;
+      --accent-hover: #2563eb;
+      --success: #22c55e;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+      --border: #2d3a4f;
+      --code-bg: #0d1117;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      padding: 2rem 1rem;
+    }
+
+    .container {
+      max-width: 820px;
+      margin: 0 auto;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      background: linear-gradient(90deg, #60a5fa, #34d399);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .subtitle {
+      color: var(--muted);
+      font-size: 1.1rem;
+    }
+
+    h2 {
+      font-size: 1.35rem;
+      margin: 2rem 0 1rem;
+      color: #93c5fd;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    h3 {
+      font-size: 1.1rem;
+      margin: 1.5rem 0 0.6rem;
+      color: #bfdbfe;
+    }
+
+    p {
+      margin-bottom: 1rem;
+      color: var(--text);
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.4rem 1.6rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .warning {
+      background: rgba(245, 158, 11, 0.12);
+      border: 1px solid rgba(245, 158, 11, 0.4);
+      border-radius: 10px;
+      padding: 1rem 1.2rem;
+      margin: 1.2rem 0;
+      color: #fcd34d;
+    }
+
+    .warning strong {
+      color: #fbbf24;
+    }
+
+    .danger {
+      background: rgba(239, 68, 68, 0.12);
+      border: 1px solid rgba(239, 68, 68, 0.4);
+      border-radius: 10px;
+      padding: 1rem 1.2rem;
+      margin: 1.2rem 0;
+      color: #fca5a5;
+    }
+
+    .success {
+      background: rgba(34, 197, 94, 0.12);
+      border: 1px solid rgba(34, 197, 94, 0.35);
+      border-radius: 10px;
+      padding: 1rem 1.2rem;
+      margin: 1.2rem 0;
+      color: #86efac;
+    }
+
+    ol, ul {
+      margin: 0.8rem 0 1.2rem 1.5rem;
+    }
+
+    li {
+      margin-bottom: 0.55rem;
+    }
+
+    code {
+      font-family: "SF Mono", "Fira Code", "Cascadia Code", Consolas, monospace;
+      background: var(--code-bg);
+      padding: 0.15rem 0.4rem;
+      border-radius: 5px;
+      font-size: 0.9em;
+      color: #7dd3fc;
+    }
+
+    pre {
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1rem 1.2rem;
+      overflow-x: auto;
+      margin: 1rem 0;
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    pre code {
+      background: none;
+      padding: 0;
+      color: #e2e8f0;
+    }
+
+    a {
+      color: #60a5fa;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+      color: #93c5fd;
+    }
+
+    .step-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 1.7rem;
+      height: 1.7rem;
+      background: var(--accent);
+      color: white;
+      border-radius: 50%;
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-right: 0.4rem;
+    }
+
+    .cmd {
+      color: #34d399;
+    }
+
+    footer {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .badge {
+      display: inline-block;
+      background: rgba(59, 130, 246, 0.2);
+      color: #93c5fd;
+      font-size: 0.75rem;
+      padding: 0.2rem 0.55rem;
+      border-radius: 999px;
+      margin-left: 0.4rem;
+      vertical-align: middle;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Ventoy Guide</h1>
+      <p class="subtitle">Create a multi-boot USB drive from Linux<br>
+      (Perfect for Windows + Linux ISOs)</p>
+    </header>
+
+    <!-- What is Ventoy -->
+    <div class="card">
+      <h2>What is Ventoy?</h2>
+      <p>
+        <strong>Ventoy</strong> is a free open-source tool that turns a USB drive into a multi-boot device.
+        You install it <strong>once</strong>, then simply copy ISO files onto the drive.
+        When you boot from the USB, Ventoy shows a menu and lets you choose which ISO to boot.
+      </p>
+      <p>
+        No need to reformat the drive every time you want a different operating system.
+        It works great with <strong>Windows</strong>, Linux, WinPE, and many other images.
+      </p>
+    </div>
+
+    <!-- Prerequisites -->
+    <h2><span class="step-number">0</span> Prerequisites</h2>
+    <ul>
+      <li>A Linux computer</li>
+      <li>A USB drive (8 GB or larger recommended)</li>
+      <li>A Windows ISO file (or any other ISO you want)</li>
+      <li>Root / sudo access</li>
+    </ul>
+
+    <div class="danger">
+      <strong>⚠ Warning:</strong> Installing Ventoy will <strong>erase everything</strong> currently on the USB drive.
+      Back up any important files first.
+    </div>
+
+    <!-- Step 1 -->
+    <h2><span class="step-number">1</span> Download Ventoy</h2>
+    <p>
+      Go to the official website and download the latest Linux package:
+    </p>
+    <p>
+      <a href="https://www.ventoy.net/en/download.html" target="_blank">
+        https://www.ventoy.net/en/download.html
+      </a>
+    </p>
+    <p>
+      Look for the file named something like:<br>
+      <code>ventoy-1.1.16-linux.tar.gz</code>
+    </p>
+    <p>You can also download it directly with a terminal command (example for version 1.1.16):</p>
+    <pre><code>wget https://sourceforge.net/projects/ventoy/files/v1.1.16/ventoy-1.1.16-linux.tar.gz</code></pre>
+
+    <!-- Step 2 -->
+    <h2><span class="step-number">2</span> Extract the archive</h2>
+    <pre><code>tar -xzf ventoy-*-linux.tar.gz
+cd ventoy-*-linux</code></pre>
+
+    <!-- Step 3 -->
+    <h2><span class="step-number">3</span> Identify your USB drive</h2>
+    <p>Plug in the USB drive, then run:</p>
+    <pre><code>lsblk</code></pre>
+    <p>
+      Look for your USB device. It is usually something like <code>/dev/sdb</code> or <code>/dev/sdc</code>
+      (never use <code>/dev/sda</code> — that is almost always your main hard drive).
+    </p>
+    <div class="warning">
+      <strong>Double-check the device name!</strong> Choosing the wrong disk will erase the wrong drive.
+    </div>
+
+    <!-- Step 4 -->
+    <h2><span class="step-number">4</span> Install Ventoy on the USB</h2>
+    <p>Run the following command (replace <code>/dev/sdX</code> with your actual USB device):</p>
+    <pre><code>sudo ./Ventoy2Disk.sh -i /dev/sdX</code></pre>
+
+    <h3>Useful options</h3>
+    <ul>
+      <li><code>-i</code> → Install Ventoy (fails if already installed)</li>
+      <li><code>-I</code> → Force reinstall</li>
+      <li><code>-u</code> → Update existing Ventoy installation</li>
+      <li><code>-g</code> → Use GPT partition style (recommended for modern UEFI systems)</li>
+      <li><code>-s</code> → Enable Secure Boot support</li>
+    </ul>
+
+    <p>Example with GPT + Secure Boot:</p>
+    <pre><code>sudo ./Ventoy2Disk.sh -i -g -s /dev/sdX</code></pre>
+
+    <div class="success">
+      After installation finishes, the USB will have two partitions.
+      The larger one is where you will copy your ISO files.
+    </div>
+
+    <!-- Step 5 -->
+    <h2><span class="step-number">5</span> Copy your ISO files</h2>
+    <p>
+      Mount the large partition of the USB (it is usually mounted automatically)
+      and simply copy your ISO files onto it:
+    </p>
+    <pre><code>cp /path/to/Windows.iso /media/youruser/Ventoy/
+cp /path/to/ubuntu.iso  /media/youruser/Ventoy/</code></pre>
+    <p>
+      You can put the files in any folder — Ventoy will find them.
+      You can also keep regular files on the same drive; they will not interfere.
+    </p>
+
+    <!-- Step 6 -->
+    <h2><span class="step-number">6</span> Boot from the USB</h2>
+    <ol>
+      <li>Restart your computer</li>
+      <li>Enter the boot menu (usually F12, F10, Esc, or Del — depends on the manufacturer)</li>
+      <li>Select the USB drive</li>
+      <li>Ventoy’s menu will appear listing all your ISO files</li>
+      <li>Choose the Windows (or Linux) ISO and press Enter</li>
+    </ol>
+
+    <div class="card">
+      <h3>That’s it!</h3>
+      <p>
+        The selected operating system will boot directly from the ISO.
+        You can now install Windows, try a live Linux distro, or run rescue tools — all from the same USB.
+      </p>
+    </div>
+
+    <!-- Extra tips -->
+    <h2>Extra Tips</h2>
+    <ul>
+      <li>You can add or remove ISO files at any time — just copy or delete them.</li>
+      <li>No need to reinstall Ventoy when you want a new ISO.</li>
+      <li>Ventoy supports Windows 7 → 11, Windows Server, WinPE, and almost all major Linux distributions.</li>
+      <li>To update Ventoy later, use: <code>sudo ./Ventoy2Disk.sh -u /dev/sdX</code></li>
+      <li>Official documentation: <a href="https://www.ventoy.net/en/doc_start.html" target="_blank">ventoy.net/en/doc_start.html</a></li>
+    </ul>
+
+    <footer>
+      Guide created for easy reference · Official site: <a href="https://www.ventoy.net" target="_blank">ventoy.net</a><br>
+      Always download Ventoy only from the official website.
+    </footer>
+  </div>
+</body>
+</html>
